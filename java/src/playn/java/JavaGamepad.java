@@ -10,9 +10,11 @@ import playn.core.Gamepad;
 class JavaGamepad implements Gamepad {
 
     private final Controller controller;
-
+    final boolean[] axisReady;
+    
     JavaGamepad(Controller controller) {
         this.controller = controller;
+        axisReady = new boolean[controller.getAxisCount()];
     }
 
     @Override
@@ -42,14 +44,14 @@ class JavaGamepad implements Gamepad {
 
     @Override
     public float axisValue(int index) {
-        return controller.getAxisValue(index);
+        return axisReady[index] ? controller.getAxisValue(index) : 0f;
     }
 
     @Override
     public boolean isAxisInDeadZone(int index) {
         float deadZone = controller.getDeadZone(index);
         float value = axisValue(index);
-        return value > deadZone || value < -deadZone;
+        return value < deadZone && value > -deadZone;
     }
 
 }

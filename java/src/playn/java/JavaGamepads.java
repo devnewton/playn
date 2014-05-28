@@ -40,4 +40,14 @@ class JavaGamepads implements Gamepads {
         return gamepads;
     }
 
+    public void update() {
+        while(Controllers.next()) {
+            if(Controllers.isEventAxis()) {
+                int index = Controllers.getEventSource().getIndex();
+                JavaGamepad gamepad = (JavaGamepad) plugged().get(index);
+                gamepad.axisReady[Controllers.getEventControlIndex()] = true;
+            }
+        }
+    }
+
 }
