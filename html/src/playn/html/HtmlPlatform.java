@@ -163,7 +163,7 @@ public class HtmlPlatform extends AbstractPlatform {
   private final HtmlPointer pointer;
   private final HtmlMouse mouse;
   private final HtmlTouch touch;
-  private final Gamepads gamepads = new GamepadsStub();
+  private final Gamepads gamepads = new HtmlGamepads();
   private final HtmlStorage storage = new HtmlStorage(this);
 
   // installs backwards compat Date.now() if needed and calls it
