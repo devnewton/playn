@@ -28,6 +28,7 @@ import org.lwjgl.opengl.Display;
 
 import playn.core.AbstractPlatform;
 import playn.core.Game;
+import playn.core.Gamepads;
 import playn.core.Json;
 import playn.core.Key;
 import playn.core.Keyboard;
@@ -132,6 +133,7 @@ public class JavaPlatform extends AbstractPlatform {
   private final JavaKeyboard keyboard;
   private final JavaPointer pointer = new JavaPointer();
   private final TouchImpl touch;
+  private final JavaGamepads gamepads;
   private final JavaGraphics graphics;
   private final JavaMouse mouse;
   private final JavaAssets assets = new JavaAssets(this);
@@ -151,6 +153,7 @@ public class JavaPlatform extends AbstractPlatform {
     keyboard = createKeyboard();
     storage = new JavaStorage(this, config);
     touch = createTouch(config);
+    gamepads = new JavaGamepads();
     if (touch instanceof JavaEmulatedTouch) {
       mouse = ((JavaEmulatedTouch)touch).createMouse(this);
     } else {
@@ -235,6 +238,11 @@ public class JavaPlatform extends AbstractPlatform {
   @Override
   public Touch touch() {
     return touch;
+  }
+  
+  @Override
+  public Gamepads gamepads() {
+    return gamepads;
   }
 
   @Override
@@ -330,6 +338,7 @@ public class JavaPlatform extends AbstractPlatform {
     graphics.init();
     mouse.init();
     keyboard.init(keyListener);
+    gamepads.init();
     game.init();
   }
 
