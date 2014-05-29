@@ -1,47 +1,52 @@
 package playn.html;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import playn.core.Gamepad;
 
 /**
  *
- * @author devnewton
+ * @author devnewton <devnewton@bci.im>
  */
-public class HtmlGamepad extends JavaScriptObject implements Gamepad {
+class HtmlGamepad implements Gamepad {
+
+    private final HtmlGamepadJavascriptObject js;
+
+    HtmlGamepad(HtmlGamepadJavascriptObject js) {
+        this.js = js;
+    }
 
     @Override
-    public native String name() /*-{
-     return this.id;
-     }-*/;
+    public String name() {
+        return js.name();
+    }
 
     @Override
-    public native int buttonCount() /*-{
-     return this.buttons.length;
-     }-*/;
+    public int buttonCount() {
+        return js.buttonCount();
+    }
 
     @Override
-    public native float buttonValue(int index) /*-{
-        return this.buttons[index].value;
-     }-*/;
+    public float buttonValue(int index) {
+        return js.buttonValue(index);
+    }
 
     @Override
-    public native boolean isButtonInDeadZone(int index) /*-{
-        return !this.buttons[index].pressed;
-     }-*/;
+    public boolean isButtonInDeadZone(int index) {
+        return js.isButtonInDeadZone(index);
+    }
 
     @Override
-    public native int axisCount() /*-{
-        return this.axes.length;
-     }-*/;
+    public int axisCount() {
+        return js.axisCount();
+    }
 
     @Override
-    public native float axisValue(int index) /*-{
-        return this.axes[index];
-     }-*/;
+    public float axisValue(int index) {
+        return js.axisValue(index);
+    }
 
     @Override
-    public native boolean isAxisInDeadZone(int index) /*-{
-        return this.axes[index] < 0.1f;
-     }-*/;
+    public boolean isAxisInDeadZone(int index) {
+        return js.isAxisInDeadZone(index);
+    }
 
 }
