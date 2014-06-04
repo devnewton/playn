@@ -8,6 +8,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Controllers;
 import playn.core.Gamepad;
 import playn.core.Gamepads;
+import playn.core.Platform;
 
 /**
  *
@@ -16,6 +17,11 @@ import playn.core.Gamepads;
 class JavaGamepads implements Gamepads {
 
     private final List<Gamepad> gamepads = new ArrayList<Gamepad>();
+    private final Platform platform;
+    
+    public JavaGamepads(Platform platform) {
+        this.platform = platform;
+    }
 
     public void init() {
         gamepads.clear();
@@ -25,7 +31,7 @@ class JavaGamepads implements Gamepads {
                 gamepads.add(new JavaGamepad(Controllers.getController(i)));
             }
         } catch (LWJGLException e) {
-            Logger.getLogger(JavaGamepads.class.getName()).log(Level.WARNING, "Cannot init gamepads service", e);
+            platform.log().error("Cannot init gamepads service", e);
         }
 
     }
