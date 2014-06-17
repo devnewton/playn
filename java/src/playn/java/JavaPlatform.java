@@ -153,7 +153,7 @@ public class JavaPlatform extends AbstractPlatform {
     keyboard = createKeyboard();
     storage = new JavaStorage(this, config);
     touch = createTouch(config);
-    gamepads = new JavaGamepads();
+    gamepads = new JavaGamepads(this);
     if (touch instanceof JavaEmulatedTouch) {
       mouse = ((JavaEmulatedTouch)touch).createMouse(this);
     } else {
